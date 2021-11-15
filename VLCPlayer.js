@@ -9,105 +9,91 @@ const { StyleSheet, requireNativeComponent, NativeModules, View } = ReactNative;
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
 export default class VLCPlayer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.seek = this.seek.bind(this);
-    this.resume = this.resume.bind(this);
-    this.snapshot = this.snapshot.bind(this);
-    this._assignRoot = this._assignRoot.bind(this);
-    this._onError = this._onError.bind(this);
-    this._onProgress = this._onProgress.bind(this);
-    this._onEnded = this._onEnded.bind(this);
-    this._onPlaying = this._onPlaying.bind(this);
-    this._onStopped = this._onStopped.bind(this);
-    this._onPaused = this._onPaused.bind(this);
-    this._onBuffering = this._onBuffering.bind(this);
-    this._onOpen = this._onOpen.bind(this);
-    this._onLoadStart = this._onLoadStart.bind(this);
-    this.changeVideoAspectRatio = this.changeVideoAspectRatio.bind(this);
+  constructor(props) {
+    super(props);
   }
   static defaultProps = {
     autoplay: false,
   };
 
-  setNativeProps(nativeProps) {
+  setNativeProps = (nativeProps) => {
     this._root.setNativeProps(nativeProps);
   }
 
-  seek(pos) {
+  seek = (pos) => {
     this.setNativeProps({ seek: pos });
   }
 
-  resume(isResume) {
+  resume = (isResume) => {
     this.setNativeProps({ resume: isResume });
   }
 
-  snapshot(path) {
+  snapshot = (path) => {
     this.setNativeProps({ snapshotPath: path });
   }
 
-  autoAspectRatio(isAuto) {
+  autoAspectRatio = (isAuto) => {
     this.setNativeProps({ autoAspectRatio: isAuto });
   }
 
-  changeVideoAspectRatio(ratio) {
+  changeVideoAspectRatio = (ratio) => {
     this.setNativeProps({ videoAspectRatio: ratio });
   }
 
-  _assignRoot(component) {
+  _assignRoot = (component) => {
     this._root = component;
   }
 
-  _onBuffering(event) {
+  _onBuffering = (event) => {
     if (this.props.onBuffering) {
       this.props.onBuffering(event.nativeEvent);
     }
   }
 
-  _onError(event) {
+  _onError = (event) => {
     if (this.props.onError) {
       this.props.onError(event.nativeEvent);
     }
   }
 
-  _onOpen(event) {
+  _onOpen = (event) => {
     if (this.props.onOpen) {
       this.props.onOpen(event.nativeEvent);
     }
   }
 
-  _onLoadStart(event) {
+  _onLoadStart = (event) => {
     if (this.props.onLoadStart) {
       this.props.onLoadStart(event.nativeEvent);
     }
   }
 
-  _onProgress(event) {
+  _onProgress = (event) => {
     if (this.props.onProgress) {
       this.props.onProgress(event.nativeEvent);
     }
   }
 
-  _onEnded(event) {
+  _onEnded = (event) => {
     if (this.props.onEnd) {
       this.props.onEnd(event.nativeEvent);
     }
   }
 
-  _onStopped() {
+  _onStopped = () => {
     this.setNativeProps({ paused: true });
     if (this.props.onStopped) {
       this.props.onStopped();
     }
   }
 
-  _onPaused(event) {
+  _onPaused = (event) => {
     if (this.props.onPaused) {
       this.props.onPaused(event.nativeEvent);
     }
   }
 
-  _onPlaying(event) {
+  _onPlaying = (event) => {
     if (this.props.onPlaying) {
       this.props.onPlaying(event.nativeEvent);
     }
