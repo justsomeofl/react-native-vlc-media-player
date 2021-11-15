@@ -27,7 +27,7 @@ export default class VLCPlayer extends Component {
     this.changeVideoAspectRatio = this.changeVideoAspectRatio.bind(this);
   }
   static defaultProps = {
-    autoplay: true,
+    autoplay: false,
   };
 
   setNativeProps(nativeProps) {
